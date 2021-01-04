@@ -42,4 +42,8 @@ class Solution(object):
                 i += 1
             else:
                 return nums[i]
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> f16f325c948df99ec99f0472b23a7c55bf1f8584
