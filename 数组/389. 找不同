@@ -1,0 +1,92 @@
+## 题目描述
+
+给定两个字符串 s 和 t，它们只包含小写字母。
+
+字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。
+
+请找出在 t 中被添加的字母。
+
+**示例 1:**
+
+输入：`s = "abcd"`, `t = "abcde"`
+
+输出：`"e"`
+
+解释：'e' 是那个被添加的字母。
+
+**示例 2:**
+
+输入：`s = "", t = "y"`
+
+输出：`"y"`
+
+**示例 3:**
+
+输入：`s = "a", t = "aa"`
+
+输出：`"a"`
+
+**示例 4:**
+
+输入：`s = "ae", t = "aea"`
+
+输出：`"a"`
+
+
+## 思路
+
+- 方法一
+
+开辟一个数组，key为s中出现的字母，value为出现的次数，遍历t，数组中对应key的value减1。
+
+时间复杂度 O(n), 空间复杂度O(m)，其中 m 是小写字母种类数。
+
+- 方法二
+
+字母有限且都是小写且只多一个，可将s的所有字母转ascii码求和，与t做减法
+
+
+## code
+
+- 方法一
+
+```python
+class Solution(object):
+    def findTheDifference(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        if s == "":
+            return t
+        token_dict = {}
+        for token in s:
+            if token not in token_dict:
+                token_dict[token] = 0
+            token_dict[token] += 1
+        for token in t:
+            if token not in token_dict or token_dict[token] == 0:
+                return token
+            token_dict[token] -= 1
+```
+
+- 方法二
+
+```python
+class Solution(object):
+    def findTheDifference(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        if s == "":
+            return t
+        sum_ = 0
+        for token in s:
+            sum_ += ord(token)
+        for token in t:
+            sum_ -= ord(token)
+        return chr(-sum_)
+```
